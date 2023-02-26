@@ -1,47 +1,30 @@
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import  React, { useState } from 'react';
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import {AppContext} from './context/Contextapi';
+import SearchReault from './Components/SearchReault';
+import VideoCard from './Components/VideoCard';
+import Home from './Components/Home';
 import Header from './Components/Header';
-import Footer from './Components/Footer';
-import NoteContain from './Components/NoteContain';
-import Note from './Components/Note';
+import VideoDetails from './Components/VideoDetails';
 
 function App() {
-  const [item, setItem]=useState([])
-  const addNote = (note) => {
-    // alert("I am clicked")
-    setItem((prevData) => {
-      return [...prevData, note]
-    })
-    
-  }
-
-  const onDelete=(id) => {
-setItem((olddata) => 
-  olddata.filter((cur , indx) => {
-    return indx != id;
-  })
-)
-  }
+  
   return (
-    <>
-      <Header/>
-      <NoteContain passNote={addNote} />
-      
-      {item.map((val, index) => {
-        return (
-        <Note
-          key={index}
-          id={index}
-          title={val.title}
-          textarea={val.textarea}
-          deleteItem={onDelete}
-          />
-          )
-        
-      })}
-      <Footer/>
-    </>
+    <AppContext>
+      <BrowserRouter>
+       
+        <div className="flex flex-col h-full">
+          <Header/>
+          <Routes>
+            <Route path='/' element={<Home/>} />
+            <Route path='/searchResult/:searchQuery' element={<SearchReault/>} />
+            <Route path='/video/:id' element={<VideoDetails/>} />
+          </Routes>
+          YouTube App Creater</div>
+      </BrowserRouter>
+    </AppContext>
   );
 }
 
