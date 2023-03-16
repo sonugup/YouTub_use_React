@@ -15,14 +15,12 @@ export const AppContext = (props) => {
     const fetchCategory=(query) => {
         setLoading(true)
         fetchYoutubapi(`search/?q=${query}`).then(({contents}) => {
-            // console.log(contents);
             setSearchResult(contents);
             setLoading(false);
         }).catch((e) => {
             console.log(e)
         })
     }
-    
   return (
     <Context.Provider
     value={{
