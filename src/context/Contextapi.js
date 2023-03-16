@@ -4,9 +4,9 @@ import {fetchYoutubapi} from "../uliti/Api"
 export const Context=createContext();
 export const AppContext = (props) => {
     const [loading, setLoading] = useState(false);
-    const [searchResult, setSearchResult] = useState(false);
+    const [searchResult, setSearchResult] = useState([]);
     const [selectCategories, setSelectCategories] = useState("New");
-    const [mobile, setMobile]= useState(false);
+    const [mobileM, setmobileM]= useState(false);
 
     useEffect(() => {
         fetchCategory(selectCategories)
@@ -15,10 +15,11 @@ export const AppContext = (props) => {
     const fetchCategory=(query) => {
         setLoading(true)
         fetchYoutubapi(`search/?q=${query}`).then(({contents}) => {
-            console.log(contents)
-            setSearchResult(contents)
-            setLoading(false)
-            
+            // console.log(contents);
+            setSearchResult(contents);
+            setLoading(false);
+        }).catch((e) => {
+            console.log(e)
         })
     }
   return (
@@ -27,10 +28,10 @@ export const AppContext = (props) => {
         loading,
         setLoading,
         searchResult,
-        selectCategories,
         setSelectCategories,
-        mobile,
-        setMobile,
+        selectCategories,
+        mobileM,
+        setmobileM,
     }}
     >
      {props.children}   
