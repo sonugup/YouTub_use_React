@@ -14,7 +14,7 @@ function App() {
   return (
     <AppContext>
       <BrowserRouter>
-       
+     
         <div className="flex flex-col h-full">
           <Header/>
           <Routes>
